@@ -1,27 +1,15 @@
-export const initialStore=()=>{
-  return{
-    message: null,
-    todos: [
-      {
-        id: 1,
-        title: "Make the bed",
-        background: null,
-      },
-      {
-        id: 2,
-        title: "Do my homework",
-        background: null,
-      }
-    ],
-    people: [],
+export const initialStore = () => {
+  return {
+     people: [],
+    favorite: [],
   }
 }
 
 export default function storeReducer(store, action = {}) {
-  switch(action.type){
+  switch (action.type) {
     case 'add_task':
 
-      const { id,  color } = action.payload
+      const { id, color } = action.payload
 
       return {
         ...store,
@@ -29,13 +17,21 @@ export default function storeReducer(store, action = {}) {
       };
 
     case 'get_people':
-      
-    return {
-      ...store,
-      people: action.payload
-    }
-      
+
+      return {
+        ...store,
+        people: action.payload
+      }
+
+    case 'favorite_element':
+
+      return {
+        ...store,
+        favorite: store.favorite.map((element) => { element.uid == uid ? { ...favorite,  } : favorite })
+      }
+
+
     default:
       throw Error('Unknown action.');
-  }    
+  }
 }

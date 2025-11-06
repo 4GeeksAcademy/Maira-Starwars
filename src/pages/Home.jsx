@@ -1,14 +1,14 @@
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import useGlobalReducer, { StoreProvider } from "../hooks/useGlobalReducer.jsx";
 import Card from "./Card.jsx";
 import SmallCard from "../components/SmallCard.jsx";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const Home = () => {
 
 	const { store, dispatch } = useGlobalReducer()
 
 	useEffect(() => {
-		asyncGetPeople()	
+		asyncGetPeople()
 	}, [])
 
 	async function asyncGetPeople() {
@@ -19,9 +19,8 @@ export const Home = () => {
 			}
 			const data = await response.json()
 			console.log("async fetch", data);
-			dispatch({ type: 'get_people', payload: data.results })
-			console.log("Log after dispatch");
-			console.log(data.results);			
+			dispatch({ type: 'get_people', payload: data.results || [] })
+			console.log("Log after dispatch", data.results);
 
 		} catch (err) {
 			console.log(err);
@@ -31,12 +30,22 @@ export const Home = () => {
 
 	return (
 		<div className="mt-5">
-			{/* {store.people?.map((value) => {
-				return 
-			})} */}
+			{console.log("esto es el store.people", store.people)
+			}
+			{store.people?.lenght > 0
+				?
+				(
+					store.people?.map((value) => {
+						return <SmallCard key={value.uid} name={value.name} uid={value.uid} />
+					}))
+				:
+				(<p>Cargando información...</p>
+				)}
+
 			<div className="d-flex overflow-x-scroll">
 				<SmallCard />
 			</div>
+
 			<div className="d-flex overflow-x-scroll">
 				<SmallCard />
 			</div>
