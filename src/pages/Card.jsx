@@ -2,13 +2,16 @@ import React, { useEffect } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { useParams } from "react-router-dom";
 
-const Card = ({ name }) => {
+const Card = () => {
 
     const { store, dispatch } = useGlobalReducer()
 
     const { uid } = useParams();
     console.log("Params:", uid);
 
+    const inferiorStyle = {
+        color: "red"
+    }
 
     useEffect(() => {
         getCharacter()
@@ -22,28 +25,43 @@ const Card = ({ name }) => {
             }
             const data = await response.json()
             console.log("async fetch Characters", data);
-            dispatch({ type: 'get_people', payload: data.result.properties })
-            console.log("Log after dispatch Characters", data.result.properties);
-
+            dispatch({ type: 'learn_more_people', payload: data.result })            
+            console.log("Log after learn more people", data.result);
         } catch (err) {
             console.log(err);
         }
     }
 
     return (
-        <div className="card mb-3" style={{ width: '540px' }}>
-            <div className="row g-0" key={uid}>
+        <div className="card mb-3" key={uid}>
+            <div className="row g-0">
                 <div className="col-md-4">
-                    <img src="https://raw.githubusercontent.com/tbone849/star-wars-guide/refs/heads/master/build/assets/img/characters/${uid}.jpg" className="img-fluid rounded-start" alt="..." />
+                    <img src={`https://raw.githubusercontent.com/tbone849/star-wars-guide/refs/heads/master/build/assets/img/characters/${uid}.jpg`} className="img-fluid rounded-start" alt="..." />
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
-                        <h5 className="card-title">{name}</h5>
-                        <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p>
+                        <h5 className="card-title">{store.learnMorePeople?.properties?.name}</h5>
+                        <p className="card-text"></p>
                     </div>
                 </div>
-            </div >            
+            </div>
+            <hr style={inferiorStyle}/>
+            <div className="row text-center" style={inferiorStyle}>
+                <div className="col-md-2 col-4"><u>Name</u></div>
+                <div className="col-md-2 col-4"><u>Birth Year</u></div>
+                <div className="col-md-2 col-4"><u>Gender</u></div>
+                <div className="col-md-2 col-4"><u>Height</u></div>
+                <div className="col-md-2 col-4"><u>Skin Color</u></div>
+                <div className="col-md-2 col-4"><u>Eye Color</u></div>
+            </div>
+            <div className="row text-center" style={inferiorStyle}>
+                <div className="col-md-2 col-4">{store.learnMorePeople?.properties?.name}</div>
+                <div className="col-md-2 col-4"></div>
+                <div className="col-md-2 col-4"></div>
+                <div className="col-md-2 col-4"></div>
+                <div className="col-md-2 col-4"></div>
+                <div className="col-md-2 col-4"></div>
+            </div>              
         </div>
     )
 }
