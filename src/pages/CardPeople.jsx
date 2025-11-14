@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer";
 import { useParams } from "react-router-dom";
 
-const Card = () => {
+const CardPeople = () => {
 
     const { store, dispatch } = useGlobalReducer()
 
@@ -36,12 +36,12 @@ const Card = () => {
         <div className="card mb-3" key={uid}>
             <div className="row g-0">
                 <div className="col-md-4">
-                    <img src={`https://raw.githubusercontent.com/tbone849/star-wars-guide/refs/heads/master/build/assets/img/characters/${uid}.jpg`} className="img-fluid rounded-start" alt="..." />
+                    <img src={`https://raw.githubusercontent.com/tbone849/star-wars-guide/refs/heads/master/build/assets/img/characters/${uid}.jpg`} className="img-fluid rounded-start" alt="..." onError={(e) => (e.target.src = 'https://raw.githubusercontent.com/tbone849/star-wars-guide/refs/heads/master/build/assets/img/placeholder.jpg')}  />
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
                         <h5 className="card-title">{store.learnMorePeople?.properties?.name}</h5>
-                        <p className="card-text"></p>
+                        <p className="card-text">{store.learnMorePeople?.description}</p>
                     </div>
                 </div>
             </div>
@@ -56,14 +56,14 @@ const Card = () => {
             </div>
             <div className="row text-center" style={inferiorStyle}>
                 <div className="col-md-2 col-4">{store.learnMorePeople?.properties?.name}</div>
-                <div className="col-md-2 col-4"></div>
-                <div className="col-md-2 col-4"></div>
-                <div className="col-md-2 col-4"></div>
-                <div className="col-md-2 col-4"></div>
-                <div className="col-md-2 col-4"></div>
+                <div className="col-md-2 col-4">{store.learnMorePeople?.properties?.birth_year}</div>
+                <div className="col-md-2 col-4">{store.learnMorePeople?.properties?.gender}</div>
+                <div className="col-md-2 col-4">{store.learnMorePeople?.properties?.height}</div>
+                <div className="col-md-2 col-4">{store.learnMorePeople?.properties?.skin_color}</div>
+                <div className="col-md-2 col-4">{store.learnMorePeople?.properties?.eye_color}</div>
             </div>              
         </div>
     )
 }
 
-export default Card;
+export default CardPeople;

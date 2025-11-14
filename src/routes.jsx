@@ -9,8 +9,12 @@ import { Layout } from "./pages/Layout";
 import { Home } from "./pages/Home";
 import { Single } from "./pages/Single";
 import { Demo } from "./pages/Demo";
-import Card from "./pages/Card";
-import SmallCard from "./components/SmallCard";
+import SmallCardPeople from "./components/SmallCardPeople";
+import SmallCardPlanets from "./components/SmallCardPlanets";
+import SmallCardStarships from "./components/SmallCardStarships";
+import CardPeople from "./pages/CardPeople";
+import CardPlanets from "./pages/CardPlanets";
+import CardStarships from "./pages/CardStarships";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -27,10 +31,12 @@ export const router = createBrowserRouter(
         <Route path= "/" element={<Home />} />
         <Route path="/single/:theId" element={ <Single />} />  {/* Dynamic route for single items */}
         <Route path="/demo" element={<Demo />} />
-        <Route path="/people/:uid" element={<Card />} />
-        <Route path="/planets/:uid" element={<Card />} />
-        <Route path="/starships/:uid" element={<Card />} />        
-        <Route path="/smallCard" element={<SmallCard/>} />
+        <Route path="/people/:uid" element={<CardPeople />} />
+        <Route path="/planets/:uid" element={<CardPlanets />} />
+        <Route path="/starships/:uid" element={<CardStarships />} />        
+        <Route path="/smallCard-people" element={<SmallCardPeople />} />
+        <Route path="/samllCard-planets" element={<SmallCardPlanets />} />
+        <Route path="/smallCard-starships" element={<SmallCardStarships />} />
       </Route>
     )
 );
