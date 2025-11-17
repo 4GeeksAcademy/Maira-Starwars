@@ -23,8 +23,7 @@ export const Home = () => {
 			}
 			const data = await response.json()
 			dispatch({ type: 'get_people', payload: data.results || [] })
-			console.log("Log after dispatch", data.results);
-		} catch (err) {
+			} catch (err) {
 			console.log(err);
 		}
 	}
@@ -37,7 +36,6 @@ export const Home = () => {
 			}
 			const data = await response.json()
 			dispatch({ type: 'get_planets', payload: data.results })
-			console.log("log after planets", data.results)
 		} catch (err) {
 			console.log(err);
 		}
@@ -51,7 +49,6 @@ export const Home = () => {
 			}
 			const data = await response.json()
 			dispatch({ type: 'get_starships', payload: data.results })
-			console.log("log after starships", data.results)
 		} catch (err) {
 			console.log(err);
 		}

@@ -1,6 +1,5 @@
 import { Link, useParams } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer";
-import { useState } from "react";
 
 
 export const Navbar = () => {
@@ -9,11 +8,7 @@ export const Navbar = () => {
 
 	const { uid } = useParams()
 
-	const eliminarFav = (index) => {
-		console.log(index);
-		dispatch({ type: 'eliminar_favs', payload: index.uid })
-		
-	}
+	const eliminarFav = (uid, category) => {dispatch({ type: 'eliminar_favs', payload: { uid, category } }) }
 
 	return (
 		<nav className="navbar sticky-top navbar-expand-lg">
@@ -24,15 +19,15 @@ export const Navbar = () => {
 
 				<div className="dropdown">
 					<button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-						FAVORITE
-						<span id="favoriteCount" style={{ background: 'black' }}>{store.favorite.length} </span>
+						FAVORITE:
+						<span id="favoriteCount" style={{ background: 'black' }}> {store.favorite.length}</span>
 					</button>
 					<ul className="dropdown-menu">
 						{store.favorite.map((value, index) => {
 							console.log("favoritos", store.favorite);
-							return <li key={index}><a className="dropdown-item" href="#">{value.name}<i className="fa-solid fa-trash" 
-							onClick={() => eliminarFav(index)}></i></a></li>
-
+							return <li key={index}><a className="dropdown-item" href="#">{value.name}
+							<i className="fa-solid fa-trash" 
+							onClick={() => eliminarFav(value.uid, value.category)}></i></a></li>
 						})}
 					</ul>
 				</div>

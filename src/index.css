@@ -1,4 +1,16 @@
+* {
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcjvlL-nHh9Bt7G6nxCnvmceXsTt8OtFBg35IfjR_I-uUiPscVncJ6PiJ9up5UZx8FBXM&usqp=CAU');
+    border-radius: 2px;
+}
 
+.card, .dropdown-item {
+     border: orange 1px solid;
+     color: white;
+}
+
+.card-img, .img-fluid {
+    border:snow solid 1px;
+}
 
 .smallCard {
     display: -webkit-box;

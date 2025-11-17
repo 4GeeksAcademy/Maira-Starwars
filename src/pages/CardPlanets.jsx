@@ -10,7 +10,7 @@ const CardPlanets = () => {
     console.log("Params:", uid);
 
     const inferiorStyle = {
-        color: "red"
+        color: "rgb(241, 68, 15)"
     }
 
     useEffect(() => {
@@ -24,9 +24,7 @@ const CardPlanets = () => {
                 throw new Error("Todo salió mal")
             }
             const data = await response.json()
-            console.log("async fetch Planets", data);
             dispatch({ type: 'learn_more_planets', payload: data.result })            
-            console.log("Log after learn more planets", data.result);
         } catch (err) {
             console.log(err);
         }
@@ -36,7 +34,9 @@ const CardPlanets = () => {
         <div className="card mb-3" key={uid}>
             <div className="row g-0">
                 <div className="col-md-4">
-                    <img src={`https://raw.githubusercontent.com/tbone849/star-wars-guide/refs/heads/master/build/assets/img/planets/${uid}.jpg`} className="img-fluid rounded-start" alt="..." onError={(e) => (e.target.src = 'https://raw.githubusercontent.com/tbone849/star-wars-guide/refs/heads/master/build/assets/img/placeholder.jpg')}  />
+                    <img src={`https://raw.githubusercontent.com/tbone849/star-wars-guide/refs/heads/master/build/assets/img/planets/${uid}.jpg`} 
+                    className="img-fluid rounded-start" alt="..." 
+                    onError={(e) => (e.target.src = 'https://raw.githubusercontent.com/tbone849/star-wars-guide/refs/heads/master/build/assets/img/placeholder.jpg')}  />
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">

@@ -50,18 +50,20 @@ export default function storeReducer(store, action = {}) {
 
     case 'favorite_element':
 
-    if (!store.favorite.some((item) => item.uid === action.payload.uid)) {
+    if (!store.favorite.some((item) => item.uid === action.payload.uid && item.category === action.payload.category)) {
             return {
         ...store,
         favorite: [...store.favorite, action.payload]
       }
     }
+    return store
     
     case 'eliminar_favs':
       
     return {
       ...store,
-      favorite: store.favorite.filter((elemento, index) => index != action.payload)
+      favorite: store.favorite.filter((elemento) => 
+        !(elemento.uid == action.payload.uid && elemento.category === action.payload.category))
     }
 
     default:
